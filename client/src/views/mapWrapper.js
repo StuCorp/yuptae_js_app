@@ -68,7 +68,9 @@ MapWrapper.prototype = {
     this.markers.forEach(function(marker){
       marker.setAnimation(google.maps.Animation.BOUNCE)
     });
-  }
+  },
+
+
 
 }
 

@@ -4,6 +4,7 @@ var MapWrapper = require('./mapWrapper');
 
 var UI = function(coords, data){
   this.tags = new Map();
+  this.data = data;
   this.renderMap(coords, data);
 };
 
@@ -39,6 +40,7 @@ UI.prototype = {
       input.value= key; 
       input.addEventListener('click', ()=>{
         console.log(key);
+        // mainMap.reloadMarkers(key);
       });
       label.for = key;
       label.innerText = key;
@@ -57,10 +59,18 @@ UI.prototype = {
 
 
 
+    // reloadMarkers: function(key){
+    //   this.data.forEach(function(gram){
+    //     if(gram.tags.includes(key)){
+    //     this.addMarker(gram);
+    //   }
+    //   });
+    // }
 
-    data.forEach(function(gram){
-      mainMap.addMarker(gram);
-    });
+    // data.forEach(function(gram){
+    //   mainMap.addMarker(gram);
+    // });
+
     mainMap.addClickEvent();
 
     var bounceButton = document.querySelector("#buttBounce");
@@ -71,7 +81,9 @@ UI.prototype = {
       sideNav.style.width = "400px";
       console.log(sideNav);
     });
-  }
+  }, 
+
+ 
 
 }
 
