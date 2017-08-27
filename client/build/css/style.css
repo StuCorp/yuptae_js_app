@@ -1,0 +1,23 @@
+.header{
+  background-color: #FFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.map-container {
+  width: 400px;
+  height: 400px;
+}
+
+.sideNav{
+  display: flex;
+  width: 40px;
+  height: 400px; 
+  border: 1px solid black;
+}
+
+img[src=""https://scontent.cdninstagram.com/t51.2885-15/s150x150/e15/21042366_515257935504045_6588728283037171712_n.jpg]{
+    border-radius:16px;
+    border:1px solid #000 !important;
+  }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yuptae</title>
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <script src="bundle.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlUKv6j94zbsWKyPkEMdhvucKwswtNOpc"></script>
+
+</head>
+<body>
+
+  <header class="header">
+    <h1 class="header__title">Yuptae</h1>
+    <button id="buttGo" class="headerButton" aria-label="Go"></button>
+    <button id="buttAbout" class="headerButton" aria-label="About"></button>
+  </header> 
+
+  <!-- pop out navigation bar for settings -->
+  <div id="sideNav" class="sideNav" width='4' height='200'>  
+  <div id="allCheckBox" class="checkboxContainer">
+
+  <p>Select all: </p>
+  <input type="checkbox" class="checkbox" value="all" checked>
+  <label for="all">All</label>
+
+  <button id="buttTagList" type="submit">
+
+  </div>  
+  </div>
+
+  <main class="main">
+<!-- map container -->
+  <div id="main-map" class="map-container"></div>
+
+  </main>
+
+<!-- MAP MODAL WINDOW POP OUT CONTAINER -->
+<!--   <div class="modal-container">
+    <div class="myModal">
+      <div class="modal-place">Glad cafe</div>
+      <div class="modal-body">
+        <img class="modal-image"/>
+        <div class="modal-comment" />
+      </div>
+      <div class="modal-buttons">
+      <button id="buttClose" class="modalButton"></button> 
+      </div>
+    </div>
+  </div> -->
+  
+  <button id="buttBounce">Bounce</button>
+  
+  <div class="loader">
+  </div>
+
+</body>
+</html>

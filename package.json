@@ -1,0 +1,21 @@
+{
+  "name": "final_project_startinout",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "build": "cd client && webpack -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4",
+    "lodash": "^4.17.4",
+    "mocha": "^3.5.0"
+  },
+  "devDependencies": {
+    "webpack": "^3.5.5"
+  }
+}
