@@ -5,6 +5,12 @@ var grams = [];
 
 var app = function(){
   //build URL
+  var cityChoose = document.querySelector("#buttChoose");
+  var cityChooseModal = document.getElementById('myModal');
+  cityChoose.addEventListener('click', ()=>{
+    myModal.style.display="block";
+  });
+
   coords = {lat:55.861865, lng:-4.252625};
   var distance = 5000;
   var accessToken = "5929060757.44315dc.c904f414cb714c5087d2ea5aa91a84c7"

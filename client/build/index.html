@@ -5,7 +5,7 @@
   <title>Yuptae</title>
   <link rel="stylesheet" type="text/css" href="./css/style.css">
   <script src="bundle.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlUKv6j94zbsWKyPkEMdhvucKwswtNOpc"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlUKv6j94zbsWKyPkEMdhvucKwswtNOpc&libraries=places"></script>
 
 </head>
 <body>
@@ -13,32 +13,53 @@
   <header class="header">
     <h1 class="header__title">Yuptae</h1>
     <label for="refresh">Refresh</label>
-    <button id="buttRefresh" class="headerButton" aria-label="refresh"></button>
-    <button id="buttAbout" class="headerButton" aria-label="About"></button>
+    <button id="buttRefresh" class="headerButton" aria-label="refresh" value="Refresh Page" onClick="window.location.reload()"></button>
+    <label for="buttChoose">Choose city</label>
+    <button id="buttChoose" class="headerButton" aria-label="About"></button>
+
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+
   </header> 
 
   <!-- pop out navigation bar for settings -->
   <div id="sideNav" class="sideNav">  
-  <div id="allCheckBox" class="checkboxContainer">
+    <div id="allCheckBox" class="checkboxContainer">
 
-  <p>Select all: </p>
-  <input id="allCheckInput"type="checkbox" class="checkbox" value="all" checked>
-  <label for="all">All</label>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+   
 
-  <button id="buttTagList" type="submit">
-
-  </div>  
+      <p>Select all: </p>
+      <input id="allCheckInput"type="checkbox" class="checkbox" value="all" checked>
+      <label for="all">All</label>
+      <p>Top 10 tags: </p>
+    </div>  
   </div>
 
+  <span id="buttOpen" onclick="openNav()">open</span>
+
+  <script>
+  function openNav() {
+      document.getElementById("sideNav").style.width = "250px";
+      document.querySelector("#buttOpen").style.visibility= "hidden";
+  }
+// debugger;
+  function closeNav() {
+      document.getElementById("sideNav").style.width = "0";
+      document.querySelector("#buttOpen").style.visibility= "visible";
+
+  }
+  </script>
+
+
   <main class="main">
-<!-- map container -->
-  <div id="main-map" class="map-container"></div>
+    <!-- map container -->
+    <div id="main-map" class="map-container"></div>
 
   </main>
 
-<!-- MAP MODAL WINDOW POP OUT CONTAINER -->
-<!--   <div class="modal-container">
-    <div class="myModal">
+  <!-- MAP MODAL WINDOW POP OUT CONTAINER -->
+ <!--  <div class="modal-container">
+    <div id= "myModal" class="myModal">
       <div class="modal-place">Glad cafe</div>
       <div class="modal-body">
         <img class="modal-image"/>

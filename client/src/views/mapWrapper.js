@@ -125,9 +125,26 @@ MapWrapper.prototype = {
             })
           });
         }
-      }
+      },
 
-    }
+      setSearchBox: function(){
+      // Create the search box and link it to the UI element.
+      var input = document.getElementById('pac-input');
+      var searchBox = new google.maps.places.SearchBox(input);
+             // this.googleMap.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+             // Bias the SearchBox results towards current map's viewport.
+             this.googleMap.addListener('bounds_changed', ()=> {
+               searchBox.setBounds(this.googleMap.getBounds());
+             });
+             google.maps.event.addListener(searchBox, 'places_changed', function() {
+               searchBox.set(this.googleMap, null);
+             debugger;
+               
+             });
+           }
+
+         }
 
 // addMarker: function(data){
 //   data.forEach((gram)=>{

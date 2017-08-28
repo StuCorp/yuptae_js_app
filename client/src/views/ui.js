@@ -18,6 +18,9 @@ UI.prototype = {
     var mapDiv = document.querySelector("#main-map");
     var mainMap = new MapWrapper(mapDiv, locationLatLong, zoom, data);
 
+
+   mainMap.setSearchBox();
+
     //get all hashtags from the instagrams
     data.forEach((gram)=>{
       gram.tags.forEach((tag)=>{
