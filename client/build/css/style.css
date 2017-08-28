@@ -21,3 +21,15 @@ img[src=""https://scontent.cdninstagram.com/t51.2885-15/s150x150/e15/21042366_51
     border-radius:16px;
     border:1px solid #000 !important;
   }
+
+/*side-nav hiding in the side*/
+.checkboxContainer{
+    display: none;
+    position: fixed;
+  }
+
+  .sideNav{
+    width:0px; 
+    height: 200px; 
+
+  }

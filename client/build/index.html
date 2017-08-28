@@ -12,16 +12,17 @@
 
   <header class="header">
     <h1 class="header__title">Yuptae</h1>
-    <button id="buttGo" class="headerButton" aria-label="Go"></button>
+    <label for="refresh">Refresh</label>
+    <button id="buttRefresh" class="headerButton" aria-label="refresh"></button>
     <button id="buttAbout" class="headerButton" aria-label="About"></button>
   </header> 
 
   <!-- pop out navigation bar for settings -->
-  <div id="sideNav" class="sideNav" width='4' height='200'>  
+  <div id="sideNav" class="sideNav">  
   <div id="allCheckBox" class="checkboxContainer">
 
   <p>Select all: </p>
-  <input type="checkbox" class="checkbox" value="all" checked>
+  <input id="allCheckInput"type="checkbox" class="checkbox" value="all" checked>
   <label for="all">All</label>
 
   <button id="buttTagList" type="submit">
