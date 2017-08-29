@@ -1,17 +1,30 @@
 var UI = require('./views/ui.js');
 var Instantgram = require('./models/instantgram');
-var coords;
+var currentCoords = undefined;
 var grams = []; 
+var firstTime = true;
+var ui = undefined;
 
 var app = function(){
-  //build URL
-  var cityChoose = document.querySelector("#buttChoose");
-  var cityChooseModal = document.getElementById('myModal');
-  cityChoose.addEventListener('click', ()=>{
-    myModal.style.display="block";
-  });
+
+  ui = new UI(apiCall);
 
   coords = {lat:55.861865, lng:-4.252625};
+
+
+  apiCall(coords);
+
+  //build URL
+  // var cityChoose = document.querySelector("#buttChoose");
+  // var cityChooseModal = document.getElementById('myModal');
+  // cityChoose.addEventListener('click', ()=>{
+  //   myModal.style.display="block";
+  // });
+}
+
+var apiCall = function(coords){
+  currentCoords = coords;
+  grams= [];
   var distance = 5000;
   var accessToken = "5929060757.44315dc.c904f414cb714c5087d2ea5aa91a84c7"
   var url = "https://api.instagram.com/v1/media/search?lat=" + coords.lat + "&lng="+ coords.lng +"&distance="+ distance + "&access_token=" + accessToken; 
@@ -20,10 +33,11 @@ var app = function(){
 
 
   makeRequest(url, requestComplete);
-
-}
+};
 
 var makeRequest = function(url, callback){
+  // debugger;
+
   var request = new XMLHttpRequest(); 
   request.open('GET', url);
   request.addEventListener('load', callback);
@@ -31,6 +45,7 @@ var makeRequest = function(url, callback){
 };
 
 var requestComplete = function(){
+  // debugger;
   if(this.status !==200) return; 
   var jsonString = this.responseText; 
   var instagrams = JSON.parse(jsonString); 
@@ -53,8 +68,15 @@ var requestComplete = function(){
     grams.push(instantgram);
     // debugger;
   });
-
-  new UI(coords, grams);
+// debugger;
+  if(firstTime===true){
+    ui.renderMap(currentCoords, grams);
+    firstTime=false;
+  } else{
+    // ui.setMapCentre(coords);
+    // ui.setData(grams);
+    ui.refreshMap(currentCoords, grams);
+  }
 };
 
 

@@ -4,7 +4,10 @@ var app = require('../app.js');
 var MapWrapper = function(container, center, zoom, data){
   this.googleMap = new google.maps.Map(container, {
     center: center,
-    zoom: zoom
+    zoom: zoom,
+    disableDefaultUI: true,
+    fullscreenControl: true,
+    zoomControl: true
   });
   this.markers =[]; 
   this.currentInfoWindow = undefined;  
@@ -45,7 +48,7 @@ MapWrapper.prototype = {
 
     var contentString = '<div id="gramLocationName" class="infoWindowContent">' + gram.locationName + '</div><div id="gramImageAndCaptionContainer" class="infoWindowContent"><img id="gramImage" class="infoWindowContent" src=\"' + gram.postImageStndRes + '\"/> <span id="gramCaption" class="infoWindowContent">' + gram.caption + '</span></div><div id="gramUserAndProfileContainer" class="infoWindowContent"> <img id="gramUserPic" class="infoWindowContent" src=\"' + gram.profilePicture + '\"/><span id="gramUserName" class="infoWindowContent">' + gram.user + '</span><div id="gramCreationTime" class="infoWindowContent">' + gram.createdTime + '</div></div><a href=\"' +gram.externalLink+ '\" target="_blank">'+gram.externalLink+ '</a>'   
     marker.addListener('click', function(){
-      
+
       var infoWindow = new google.maps.InfoWindow({
         content: contentString
       });
@@ -147,7 +150,7 @@ MapWrapper.prototype = {
         }
       },
 
-      setSearchBox: function(){
+      setSearchBox: function(callback){
       // Create the search box and link it to the UI element.
       var input = document.getElementById('pac-input');
       var options = {
@@ -170,6 +173,8 @@ MapWrapper.prototype = {
                   lng: places[0].geometry.location.lng() 
               }
               this.googleMap.setCenter(newCoords);
+              // debugger;
+              callback(newCoords);
 
              });
            },

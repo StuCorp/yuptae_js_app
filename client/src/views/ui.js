@@ -4,23 +4,39 @@ var MapWrapper = require('./mapWrapper');
 var Tag = require('../models/tag.js');
 var _ = require('lodash');
 
-var UI = function(coords, data){
+var UI = function(callback){
   this.tags = new Map();
-  this.data = data;
-  this.renderMap(coords, data);
+  this.data = undefined;
+  // this.renderMap(coords, data);
   this.selectedTags =[];
+  this.apiCall = callback; 
+  this.mainMap = undefined;
 
 };
 
 UI.prototype = {
 
   renderMap: function(locationLatLong, data){
+    this.data = data; 
     var zoom =12; 
     var mapDiv = document.querySelector("#main-map");
-    var mainMap = new MapWrapper(mapDiv, locationLatLong, zoom, data);
+    this.mainMap = new MapWrapper(mapDiv, locationLatLong, zoom, data);
 
+    this.setUp(data);
+  },
 
-   mainMap.setSearchBox();
+  refreshMap: function(coords, data){
+    this.data= data;
+    this.tags = new Map();
+    this.mainMap.googleMap.setCenter(coords);
+
+    this.setUp(data);
+  },
+
+  setUp: function(data){
+
+    this.selectedTags = []; 
+    this.mainMap.setSearchBox(this.apiCall);
 
     //get all hashtags from the instagrams
     data.forEach((gram)=>{
@@ -62,38 +78,23 @@ UI.prototype = {
 
 
     //generate check boxes for each tag
-    var checkBoxOptions = document.querySelector("#allCheckBox");
+    var checkBoxOptions = document.querySelector("#topTenContainer");
+
+    while(checkBoxOptions.firstChild){
+     checkBoxOptions.removeChild(checkBoxOptions.firstChild);
+   }
 
 
 
-
-    // this.tags.forEach((value, key)=>{
-    //   var input = document.createElement("input"); 
-    //   var label = document.createElement("label");
-    //   input.type ="checkbox";
-    //   input.className= "checkbox"; 
-    //   input.value= key; 
-    //   input.addEventListener('click', ()=>{
-    //     console.log(key);
-    //     // mainMap.reloadMarkers(key);
-    //   });
-    //   label.for = key;
-    //   label.innerText = key;
-    //   var br = document.createElement("br");
-    //   checkBoxOptions.appendChild(br);
-    //   checkBoxOptions.appendChild(label);
-    //   checkBoxOptions.appendChild(input);
-    // });
-
-    var sortedTagArray = _.sortBy(tagArray, [function(tagObject) { return tagObject.value; }]);
-    sortedTagArray.reverse();
+   var sortedTagArray = _.sortBy(tagArray, [function(tagObject) { return tagObject.value; }]);
+   sortedTagArray.reverse();
 
 
-    console.log(sortedTagArray);
+   console.log(sortedTagArray);
 
-    var tagBoxRefs = []; 
-    
-    
+   var tagBoxRefs = []; 
+   
+   
     // debugger;
     var sortedTagArrayTop10 = sortedTagArray.slice(0, 10);
     sortedTagArrayTop10.forEach((tagObject, index)=>{
@@ -111,15 +112,15 @@ UI.prototype = {
         console.log(allInput);
 
         if(!this.selectedTags.includes(tagObject.name)){
-        this.selectedTags.push(tagObject.name);
-      } else{
-        this.selectedTags.splice(this.selectedTags.indexOf(tagObject.name), 1);
-      }
+          this.selectedTags.push(tagObject.name);
+        } else{
+          this.selectedTags.splice(this.selectedTags.indexOf(tagObject.name), 1);
+        }
         console.log(this.selectedTags);
 
         //refresh map
-        // debugger;
-        mainMap.refreshMap(mainMap, this.selectedTags, this.data);
+        // // debugger;
+        this.mainMap.refreshMap(this.mainMap, this.selectedTags, this.data);
 
         // mainMap.reloadMarkers(key);
       });
@@ -142,33 +143,18 @@ UI.prototype = {
         input.checked= false; 
       });
       // debugger;
-        mainMap.refreshMap(mainMap, this.selectedTags, this.data);
+      this.mainMap.refreshMap(this.mainMap, this.selectedTags, this.data);
 
     });
-
-    // var buttTag = document.createElement("button");
-    // buttTag.id = "buttTagList";
-    // buttTag.type = "submit";
-    // buttTag.addEventListener('click' ()=>{
-    //   console.log("click");
-    // })
-    // checkBoxOptions.appendChild(buttTag);
+    
 
 
-
-    // reloadMarkers: function(key){
-    //   this.data.forEach(function(gram){
-    //     if(gram.tags.includes(key)){
-    //     this.addMarker(gram);
-    //   }
-    //   });
-    // }
-
-    data.forEach(function(gram){
-      mainMap.addMarker(gram);
+    this.mainMap.deleteMarkers();
+    data.forEach((gram)=>{
+      this.mainMap.addMarker(gram);
     });
 
-    mainMap.addClickEvent();
+    // this.mainMap.addClickEvent();
 
     var bounceButton = document.querySelector("#buttBounce");
     // bounceButton.addEventListener("click", mainMap.bounceMarkers.bind(mainMap));
@@ -180,12 +166,17 @@ UI.prototype = {
       // var checkboxContainer = document.querySelector("#allCheckBox");
       // console.log(checkboxContainer);
       // checkboxContainer.style.display = "block";
-      mainMap.geoGetUm();
-      mainMap.randomInfoBox();
+      // this.mainMap.geoGetUm();
+
+      this.mainMap.randomInfoBox();
 
     });
-  }, 
 
+    // // debugger;
+    // var liverCoords = {lat:53.4084, lng:-2.9916};
+    // this.apiCall(liverCoords);
+
+  } 
 
 
 }
