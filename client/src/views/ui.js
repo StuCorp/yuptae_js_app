@@ -181,6 +181,8 @@ UI.prototype = {
       // console.log(checkboxContainer);
       // checkboxContainer.style.display = "block";
       mainMap.geoGetUm();
+      mainMap.randomInfoBox();
+
     });
   }, 
 

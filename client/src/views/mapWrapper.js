@@ -45,6 +45,7 @@ MapWrapper.prototype = {
 
     var contentString = '<div id="gramLocationName" class="infoWindowContent">' + gram.locationName + '</div><div id="gramImageAndCaptionContainer" class="infoWindowContent"><img id="gramImage" class="infoWindowContent" src=\"' + gram.postImageStndRes + '\"/> <span id="gramCaption" class="infoWindowContent">' + gram.caption + '</span></div><div id="gramUserAndProfileContainer" class="infoWindowContent"> <img id="gramUserPic" class="infoWindowContent" src=\"' + gram.profilePicture + '\"/><span id="gramUserName" class="infoWindowContent">' + gram.user + '</span><div id="gramCreationTime" class="infoWindowContent">' + gram.createdTime + '</div></div><a href=\"' +gram.externalLink+ '\" target="_blank">'+gram.externalLink+ '</a>'   
     marker.addListener('click', function(){
+      
       var infoWindow = new google.maps.InfoWindow({
         content: contentString
       });
@@ -61,17 +62,31 @@ MapWrapper.prototype = {
     this.setMapOnAll(this.googleMap);
   },
 
-  addClickEvent: function(){
-    google.maps.event.addListener(this.googleMap, 'click', (event)=>{
-    //   console.log(event);
-    //   console.log(event.latLng.lat());
-    //   var coords = {lat: event.latLng.lat(), lng: event.latLng.lng()};
-    //   debugger;
-    //   this.addMarker({coords});
-    // }.bind(this));
-    this.clearMarkers();
-  });
+  randomInfoBox: function(){
+    var markerIndex = _.random(0, this.markers.length-1);
+    var randomMarker = this.markers[markerIndex];
+    var event = new MouseEvent('click', {
+       'view': window,
+       'bubbles': true,
+       'cancelable': true
+     });
+    randomMarker.dispatchEvent(event);
+    // var bounceButton = document.querySelector("#buttOpen");
+
+
   },
+
+  // addClickEvent: function(){
+  //   google.maps.event.addListener(this.googleMap, 'click', (event)=>{
+  //   //   console.log(event);
+  //   //   console.log(event.latLng.lat());
+  //   //   var coords = {lat: event.latLng.lat(), lng: event.latLng.lng()};
+  //   //   debugger;
+  //   //   this.addMarker({coords});
+  //   // }.bind(this));
+  //   this.clearMarkers();
+  // });
+  // },
 
   bounceMarkers: function(){
     this.markers.forEach(function(marker){
