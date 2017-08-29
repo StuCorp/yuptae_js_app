@@ -15,6 +15,24 @@
 }
 
 
+/*STYLE OF INFO WINDOW CONTENTS*/
+#gramImage{
+  width: 100px;
+
+  flex: 2;
+}
+
+#gramCaption{
+  flex: 1;
+}
+
+#gramUserPic{
+  width: 20px;
+}
+
+#gramImageAndCaptionContainer{
+  display: inline-block;
+}
 
 /*.sideNav{
   display: flex;
@@ -39,8 +57,16 @@
 
 
   /*
-the nav bar stuff 
+*
+*
+*  the nav bar stuff 
+*
+*
   */
+
+  #allCheckBox{
+    color: white;
+  }
   /* The side navigation menu */
   .sideNav {
       height: 100%; /* 100% Full-height */

@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var app = require('../app.js');
 
 var MapWrapper = function(container, center, zoom, data){
   this.googleMap = new google.maps.Map(container, {
@@ -39,9 +40,13 @@ MapWrapper.prototype = {
     if(recency>= 0.8) {    
       marker.setAnimation(google.maps.Animation.BOUNCE);
     }
+
+
+
+    var contentString = '<div id="gramLocationName" class="infoWindowContent">' + gram.locationName + '</div><div id="gramImageAndCaptionContainer" class="infoWindowContent"><img id="gramImage" class="infoWindowContent" src=\"' + gram.postImageStndRes + '\"/> <span id="gramCaption" class="infoWindowContent">' + gram.caption + '</span></div><div id="gramUserAndProfileContainer" class="infoWindowContent"> <img id="gramUserPic" class="infoWindowContent" src=\"' + gram.profilePicture + '\"/><span id="gramUserName" class="infoWindowContent">' + gram.user + '</span><div id="gramCreationTime" class="infoWindowContent">' + gram.createdTime + '</div></div><a href=\"' +gram.externalLink+ '\" target="_blank">'+gram.externalLink+ '</a>'   
     marker.addListener('click', function(){
       var infoWindow = new google.maps.InfoWindow({
-        content: gram.caption
+        content: contentString
       });
       infoWindow.open(this.googleMap, marker);
       this.previousInfoWindow = this.currentInfoWindow;
@@ -130,6 +135,11 @@ MapWrapper.prototype = {
       setSearchBox: function(){
       // Create the search box and link it to the UI element.
       var input = document.getElementById('pac-input');
+      var options = {
+          types: [],
+          componentRestrictions: {country: 'us'}
+      };
+
       var searchBox = new google.maps.places.SearchBox(input);
              // this.googleMap.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -137,10 +147,22 @@ MapWrapper.prototype = {
              this.googleMap.addListener('bounds_changed', ()=> {
                searchBox.setBounds(this.googleMap.getBounds());
              });
-             google.maps.event.addListener(searchBox, 'places_changed', function() {
-               searchBox.set(this.googleMap, null);
-             debugger;
-               
+             google.maps.event.addListener(searchBox, 'places_changed', ()=> {
+              var places = searchBox.getPlaces();
+              console.log(places);
+              var newCoords = {
+                lat: places[0].geometry.location.lat(),
+                  lng: places[0].geometry.location.lng() 
+              }
+              this.googleMap.setCenter(newCoords);
+
+             });
+           },
+
+           geoGetUm: function(){
+             navigator.geolocation.getCurrentPosition((position)=> {
+               var center = {lat: position.coords.latitude, lng: position.coords.longitude};
+               this.googleMap.setCenter(center);
              });
            }
 

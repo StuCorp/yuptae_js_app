@@ -9,6 +9,7 @@ var UI = function(coords, data){
   this.data = data;
   this.renderMap(coords, data);
   this.selectedTags =[];
+
 };
 
 UI.prototype = {
@@ -172,13 +173,14 @@ UI.prototype = {
     var bounceButton = document.querySelector("#buttBounce");
     // bounceButton.addEventListener("click", mainMap.bounceMarkers.bind(mainMap));
     bounceButton.addEventListener("click", ()=>{
-      var sideNav = document.querySelector("#sideNav");
-      console.log(sideNav);
-      sideNav.style.width = "400px";
-      console.log(sideNav);
-      var checkboxContainer = document.querySelector("#allCheckBox");
-      console.log(checkboxContainer);
-      checkboxContainer.style.display = "block";
+      // var sideNav = document.querySelector("#sideNav");
+      // console.log(sideNav);
+      // sideNav.style.width = "400px";
+      // console.log(sideNav);
+      // var checkboxContainer = document.querySelector("#allCheckBox");
+      // console.log(checkboxContainer);
+      // checkboxContainer.style.display = "block";
+      mainMap.geoGetUm();
     });
   }, 
 
