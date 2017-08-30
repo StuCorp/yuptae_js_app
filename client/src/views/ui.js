@@ -12,6 +12,7 @@ var UI = function(callback){
   this.apiCall = callback; 
   this.mainMap = undefined;
 
+
 };
 
 UI.prototype = {
@@ -21,8 +22,16 @@ UI.prototype = {
     var zoom =12; 
     var mapDiv = document.querySelector("#main-map");
     this.mainMap = new MapWrapper(mapDiv, locationLatLong, zoom, data);
-
     this.setUp(data);
+  //store current location
+  this.mainMap.geoGetUm();
+  var homeButton = document.querySelector("#buttRefresh");
+  homeButton.addEventListener('click', ()=>{
+    var responseText = localStorage.getItem("currentLocation");
+    var localCoords = JSON.parse(responseText);
+      this.apiCall(localCoords);
+  });
+
   },
 
   refreshMap: function(coords, data){
@@ -93,8 +102,8 @@ UI.prototype = {
    console.log(sortedTagArray);
 
    var tagBoxRefs = []; 
-   
-   
+
+
     // debugger;
     var sortedTagArrayTop10 = sortedTagArray.slice(0, 10);
     sortedTagArrayTop10.forEach((tagObject, index)=>{
@@ -146,7 +155,7 @@ UI.prototype = {
       this.mainMap.refreshMap(this.mainMap, this.selectedTags, this.data);
 
     });
-    
+
 
 
     this.mainMap.deleteMarkers();

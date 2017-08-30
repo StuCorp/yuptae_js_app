@@ -182,7 +182,11 @@ MapWrapper.prototype = {
            geoGetUm: function(){
              navigator.geolocation.getCurrentPosition((position)=> {
                var center = {lat: position.coords.latitude, lng: position.coords.longitude};
-               this.googleMap.setCenter(center);
+               // this.googleMap.setCenter(center);
+               // var today = new Date();
+              // today = today.toJSON().slice(0,10);
+               localStorage.setItem("currentLocation", JSON.stringify(center));
+
              });
            }
 
