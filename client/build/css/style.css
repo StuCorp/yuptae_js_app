@@ -55,8 +55,43 @@
 
   }*/
 
+/*
+*
+*    City Search Box
+*)
+*/
+.pac-container:after {
+    /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+
+    background-image: none !important;
+    height: 0px;
+}
+
+/*
+*
+*   Buttons
+*
+*/
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+#buttRefresh {
+/*background: url('../images/refresh.png');*/
+/*width: 20px;
+height: 20px;*/
+}
+
+#cityChooseIcon {
+
+}
+
 
   /*
+}
+}
 *
 *
 *  the nav bar stuff 
@@ -97,7 +132,7 @@
   }
 
   /* Position and style the close button (top right corner) */
-  .sideNav .closebtn {
+  .sideNav #closebtn {
       position: absolute;
       top: 0;
       right: 25px;

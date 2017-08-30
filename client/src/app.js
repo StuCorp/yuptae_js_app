@@ -22,12 +22,18 @@ var app = function(){
   // });
 }
 
-var apiCall = function(coords){
+var apiCall = function(coords, chosenDistance){
+  
+  if(coords){
   currentCoords = coords;
+  }
   grams= [];
   var distance = 5000;
+ if(chosenDistance){
+    distance= chosenDistance;
+ }
   var accessToken = "5929060757.44315dc.c904f414cb714c5087d2ea5aa91a84c7"
-  var url = "https://api.instagram.com/v1/media/search?lat=" + coords.lat + "&lng="+ coords.lng +"&distance="+ distance + "&access_token=" + accessToken; 
+  var url = "https://api.instagram.com/v1/media/search?lat=" + currentCoords.lat + "&lng="+ currentCoords.lng +"&distance="+ distance + "&access_token=" + accessToken; 
   // var url2 = "https://api.instagram.com/v1/media/search?lat=55.8642&lng=-4.2518&distance=5000&access_token=5929060757.44315dc.c904f414cb714c5087d2ea5aa91a84c7";
   console.log(url);
 

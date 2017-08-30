@@ -12,12 +12,22 @@
 
   <header class="header">
     <h1 class="header__title">Yuptae</h1>
-    <label for="refresh">Refresh</label>
-    <button id="buttRefresh" class="headerButton" aria-label="refresh" value="Refresh Page" onClick="window.location.reload()"></button>
-    <label for="buttChoose">Choose city</label>
-    <button id="buttChoose" class="headerButton" aria-label="About"></button>
+    <!-- <label for="refresh">Refresh</label> -->
+    <img id="buttHome" src="../images/home-map-marker.png" class="icon" aria-label="refresh" value="Refresh Page"> 
+    <img id="buttRefresh" src="../images/refresh.png" class="icon" aria-label="refresh" value="Refresh Page"> 
+    <img id="cityChooseIcon" src="../images/magnify.png" class="icon">
+   <!--  <label for="buttChoose">Choose city</label>
+    <button id="buttChoose" class="headerButton" aria-label="About"></button> -->
 
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <select id="distanceSelector"> 
+            <option value=5000 selected>5km</option> 
+              <option value=1000>1km</option>
+              <option value=500>500m</option>
+              <option value=100>100m</option>
+              <option value=50>50m</option>
+    </select>
+
 
   </header> 
 
@@ -25,7 +35,7 @@
   <div id="sideNav" class="sideNav">  
     <div id="allCheckBox" class="checkboxContainer">
 
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <img href="javascript:void(0)" src="../images/arrow-left.png" id="closebtn" class="icon" onclick="closeNav()">
    
 
       <p>Select all: </p>
@@ -37,7 +47,7 @@
     </div>  
   </div>
 
-  <span id="buttOpen" onclick="openNav()">open</span>
+  <img id="buttOpen" class="icon" src="../images/arrow-right.png" onclick="openNav()">
 
   <script>
   function openNav() {

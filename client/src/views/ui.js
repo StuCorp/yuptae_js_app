@@ -25,14 +25,34 @@ UI.prototype = {
     this.setUp(data);
   //store current location
   this.mainMap.geoGetUm();
-  var homeButton = document.querySelector("#buttRefresh");
-  homeButton.addEventListener('click', ()=>{
-    var responseText = localStorage.getItem("currentLocation");
-    var localCoords = JSON.parse(responseText);
-      this.apiCall(localCoords);
-  });
+  this.setUpButtons();  
 
   },
+
+
+  setUpButtons: function(){
+//HOME BUTTON
+    var homeButton = document.querySelector("#buttHome");
+    homeButton.addEventListener('click', ()=>{
+      var responseText = localStorage.getItem("currentLocation");
+      var localCoords = JSON.parse(responseText);
+        this.apiCall(localCoords);
+    });
+//DISTANCE SELECTOR
+var distanceButton = document.querySelector("#distanceSelector"); 
+distanceSelector.addEventListener('change', ()=>{
+  console.log(distanceSelector.value);
+  this.apiCall(false, distanceSelector.value);
+});
+//REFRESH BUTTON 
+var refreshButton = document.querySelector("#buttRefresh"); 
+refreshButton.addEventListener('click', ()=>{
+  this.apiCall(false, false);
+});
+
+
+  },
+
 
   refreshMap: function(coords, data){
     this.data= data;
