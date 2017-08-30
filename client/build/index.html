@@ -4,30 +4,36 @@
   <meta charset="UTF-8">
   <title>Yuptae</title>
   <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
   <script src="bundle.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlUKv6j94zbsWKyPkEMdhvucKwswtNOpc&libraries=places"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
 
 </head>
 <body>
 
   <header class="header">
-    <h1 class="header__title">Yuptae</h1>
+    <h1 id="headerText" class="header__title">Yuptae?</h1>
     <!-- <label for="refresh">Refresh</label> -->
-    <img id="buttHome" src="../images/home-map-marker.png" class="icon" aria-label="refresh" value="Refresh Page"> 
-    <img id="buttRefresh" src="../images/refresh.png" class="icon" aria-label="refresh" value="Refresh Page"> 
-    <img id="cityChooseIcon" src="../images/magnify.png" class="icon">
-   <!--  <label for="buttChoose">Choose city</label>
-    <button id="buttChoose" class="headerButton" aria-label="About"></button> -->
+    <div id="iconBar" class="menu">
+      <img id="buttHome" src="../images/home-map-marker.png" class="icon" aria-label="refresh" value="Refresh Page"> 
+      <img id="buttRefresh" src="../images/refresh.png" class="icon" aria-label="refresh" value="Refresh Page"> 
+      <img id="cityChooseIcon" src="../images/magnify.png" class="icon">
+      <img id="distanceChooseIcon" src="../images/walk.png" class="icon">
+    </div>
 
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    <select id="distanceSelector"> 
-            <option value=5000 selected>5km</option> 
-              <option value=1000>1km</option>
-              <option value=500>500m</option>
-              <option value=100>100m</option>
-              <option value=50>50m</option>
-    </select>
-
+    <div id="invisibleInputsBar" class="menu">
+      <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+      <select id="distanceSelector"> 
+        <option value=5000 selected>5km</option> 
+        <option value=1000>1km</option>
+        <option value=500>500m</option>
+        <option value=100>100m</option>
+        <option value=50>50m</option>
+      </select>
+    </div>
 
   </header> 
 
@@ -35,8 +41,8 @@
   <div id="sideNav" class="sideNav">  
     <div id="allCheckBox" class="checkboxContainer">
 
-    <img href="javascript:void(0)" src="../images/arrow-left.png" id="closebtn" class="icon" onclick="closeNav()">
-   
+      <img href="javascript:void(0)" src="../images/arrow-left.png" id="closebtn" class="icon">
+
 
       <p>Select all: </p>
       <input id="allCheckInput"type="checkbox" class="checkbox" value="all" checked>
@@ -47,46 +53,24 @@
     </div>  
   </div>
 
-  <img id="buttOpen" class="icon" src="../images/arrow-right.png" onclick="openNav()">
-
-  <script>
-  function openNav() {
-      document.getElementById("sideNav").style.width = "250px";
-      document.querySelector("#buttOpen").style.visibility= "hidden";
-  }
-// debugger;
-  function closeNav() {
-      document.getElementById("sideNav").style.width = "0";
-      document.querySelector("#buttOpen").style.visibility= "visible";
-
-  }
-  </script>
+  <img id="buttOpen" class="icon" src="../images/arrow-right.png">
 
 
-  <main class="main">
-    <!-- map container -->
-    <div id="main-map" class="map-container"></div>
 
-  </main>
+<main class="main">
+  <!-- map container -->
+  <div id="main-map" class="map-container"></div>
 
-  <!-- MAP MODAL WINDOW POP OUT CONTAINER -->
- <!--  <div class="modal-container">
-    <div id= "myModal" class="myModal">
-      <div class="modal-place">Glad cafe</div>
-      <div class="modal-body">
-        <img class="modal-image"/>
-        <div class="modal-comment" />
-      </div>
-      <div class="modal-buttons">
-      <button id="buttClose" class="modalButton"></button> 
-      </div>
-    </div>
-  </div> -->
-  
-  <button id="buttBounce">Bounce</button>
-  
-  <div class="loader">
+</main>
+
+<div id="belowMapControlBar" class="menu">
+<img id="randomSelectButt" class="icon" src="../images/random.png">
+</div>
+
+<div id="footerContainer" class="footerAndHeader">
+  <div id="footer">
   </div>
+</div>
 
 </body>
 </html>

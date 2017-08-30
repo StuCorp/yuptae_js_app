@@ -12,7 +12,6 @@ var UI = function(callback){
   this.apiCall = callback; 
   this.mainMap = undefined;
 
-
 };
 
 UI.prototype = {
@@ -27,17 +26,17 @@ UI.prototype = {
   this.mainMap.geoGetUm();
   this.setUpButtons();  
 
-  },
+},
 
 
-  setUpButtons: function(){
+setUpButtons: function(){
 //HOME BUTTON
-    var homeButton = document.querySelector("#buttHome");
-    homeButton.addEventListener('click', ()=>{
-      var responseText = localStorage.getItem("currentLocation");
-      var localCoords = JSON.parse(responseText);
-        this.apiCall(localCoords);
-    });
+var homeButton = document.querySelector("#buttHome");
+homeButton.addEventListener('click', ()=>{
+  var responseText = localStorage.getItem("currentLocation");
+  var localCoords = JSON.parse(responseText);
+  this.apiCall(localCoords);
+});
 //DISTANCE SELECTOR
 var distanceButton = document.querySelector("#distanceSelector"); 
 distanceSelector.addEventListener('change', ()=>{
@@ -50,22 +49,66 @@ refreshButton.addEventListener('click', ()=>{
   this.apiCall(false, false);
 });
 
+//RANDOM GRAM SELECT
+var randomSelect = document.querySelector("#randomSelectButt");
+randomSelect.addEventListener("click", ()=>{
+  console.log("nice try!");
+  this.mainMap.randomInfoBox();
+});
 
-  },
+var cityChoose = document.querySelector("#cityChooseIcon"); 
+var citySearchBox = document.querySelector("#pac-input"); 
+cityChoose.addEventListener("click", ()=>{
+  // debugger;
+  if(citySearchBox.style.visibility==="hidden"){
+    citySearchBox.style.visibility="visible";
+  } else{
+    citySearchBox.style.visibility="hidden";
+  }
+});
 
 
-  refreshMap: function(coords, data){
-    this.data= data;
-    this.tags = new Map();
-    this.mainMap.googleMap.setCenter(coords);
+var distanceChoose = document.querySelector("#distanceChooseIcon"); 
+var distanceBox = document.querySelector("#distanceSelector"); 
+distanceChoose.addEventListener("click", ()=>{
+  // debugger;
+  if(distanceBox.style.visibility==="hidden"){
+    distanceBox.style.visibility="visible";
+  } else{
+    distanceBox.style.visibility="hidden";
+  }
+});
 
-    this.setUp(data);
-  },
+//nav open and close
 
-  setUp: function(data){
+var buttOpen = document.querySelector("#buttOpen");
+buttOpen.addEventListener('click', ()=>{
+  document.getElementById("sideNav").style.width = "250px";
+  document.querySelector("#buttOpen").style.visibility= "hidden";
+});
 
-    this.selectedTags = []; 
-    this.mainMap.setSearchBox(this.apiCall);
+var buttClose = document.querySelector("#closebtn");
+buttClose.addEventListener('click', ()=>{
+  document.getElementById("sideNav").style.width = "0";
+  document.querySelector("#buttOpen").style.visibility= "visible";
+});
+
+
+},
+
+
+refreshMap: function(coords, data){
+  this.data= data;
+  this.tags = new Map();
+  this.mainMap.googleMap.setCenter(coords);
+
+  this.setUp(data);
+},
+
+setUp: function(data){
+
+  this.selectedTags = []; 
+  this.mainMap.setSearchBox(this.apiCall);
 
     //get all hashtags from the instagrams
     data.forEach((gram)=>{
@@ -185,23 +228,9 @@ refreshButton.addEventListener('click', ()=>{
 
     // this.mainMap.addClickEvent();
 
-    var bounceButton = document.querySelector("#buttBounce");
-    // bounceButton.addEventListener("click", mainMap.bounceMarkers.bind(mainMap));
-    bounceButton.addEventListener("click", ()=>{
-      // var sideNav = document.querySelector("#sideNav");
-      // console.log(sideNav);
-      // sideNav.style.width = "400px";
-      // console.log(sideNav);
-      // var checkboxContainer = document.querySelector("#allCheckBox");
-      // console.log(checkboxContainer);
-      // checkboxContainer.style.display = "block";
-      // this.mainMap.geoGetUm();
+    
 
-      this.mainMap.randomInfoBox();
-
-    });
-
-    // // debugger;
+    debugger;
     // var liverCoords = {lat:53.4084, lng:-2.9916};
     // this.apiCall(liverCoords);
 

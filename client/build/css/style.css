@@ -2,16 +2,56 @@
   border: 1px solid hotpink; 
 }
 
+body{
+  font-family: 'Indie Flower', cursive;
+
+}
+
+#main-map {
+  position: relative;
+  padding-bottom: 75%; // This is the aspect ratio
+  height: 0;
+  overflow: hidden;
+  margin: 5%;
+
+}
+#main-map iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
 .header{
   background-color: #FFF;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  /*justify-content: space-around;*/
+  font-family: 'Indie Flower', cursive;
+  align-items: center;
+
+}
+
+.main {
+  justify-content: center;
 }
 
 .map-container {
-  width: 400px;
-  height: 400px;
+}
+
+@media screen and (min-width: 450px) {
+  .map- {padding-top: 15px;}
+  .sideNav a {font-size: 18px;}
+}
+
+
+#belowMapControlBar {
+  display: flex;
+  flex-direction: row; 
+  align-content: center;
+  justify-content: center; 
 }
 
 
@@ -34,37 +74,19 @@
   display: inline-block;
 }
 
-/*.sideNav{
-  display: flex;
-  width: 40px;
-  height: 400px; 
-  border: 1px solid black;
-}*/
-
-
-
-/*side-nav hiding in the side*/
-/*.checkboxContainer{
-    display: none;
-    position: fixed;
-  }*/
-/*
-  .sideNav{
-    width:0px; 
-    height: 200px; 
-
-  }*/
 
 /*
 *
 *    City Search Box
 *)
 */
-.pac-container:after {
-    /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
 
-    background-image: none !important;
-    height: 0px;
+
+.pac-container:after {
+  /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+
+  background-image: none !important;
+  height: 0px;
 }
 
 /*
@@ -72,20 +94,35 @@
 *   Buttons
 *
 */
-
 .icon {
   width: 20px;
   height: 20px;
 }
 
 #buttRefresh {
-/*background: url('../images/refresh.png');*/
+  /*background: url('../images/refresh.png');*/
 /*width: 20px;
 height: 20px;*/
 }
 
 #cityChooseIcon {
 
+}
+
+#distanceSelector {
+  height: 20px;
+  visibility: hidden;
+}
+
+#pac-input{
+  visibility: hidden;
+  height: 20px;
+  width: 100px;
+}
+
+#randomSelectButt {
+  height: 5%;
+  width: 5%;
 }
 
 
@@ -97,99 +134,58 @@ height: 20px;*/
 *  the nav bar stuff 
 *
 *
-  */
+*/
 
-  #allCheckBox{
-    color: white;
-  }
-  /* The side navigation menu */
-  .sideNav {
-      height: 100%; /* 100% Full-height */
-      width: 0; /* 0 width - change this with JavaScript */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Stay on top */
-      top: 0;
-      left: 0;
-      background-color: rgba(0,0,0,0.5); /* Black*/
-      overflow-x: hidden; /* Disable horizontal scroll */
-      padding-top: 60px; /* Place content 60px from the top */
-      transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-  }
+#allCheckBox{
+  color: white;
+}
+/* The side navigation menu */
+.sideNav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5); /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
 
-  /* The navigation menu links */
-  .sideNav > a {
-      padding: 8px 8px 8px 32px;
-      text-decoration: none;
-      font-size: 25px;
-      color: #818181;
-      display: block;
-      transition: 0.3s
-  }
+/* The navigation menu links */
+.sideNav > a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s
+}
 
-  /* When you mouse over the navigation links, change their color */
-  .sideNav a:hover, .offcanvas a:focus{
-      color: #f1f1f1;
-  }
+/* When you mouse over the navigation links, change their color */
+.sideNav a:hover, .offcanvas a:focus{
+  color: #f1f1f1;
+}
 
-  /* Position and style the close button (top right corner) */
-  .sideNav #closebtn {
-      position: absolute;
-      top: 0;
-      right: 25px;
-      font-size: 36px;
-      margin-left: 50px;
-  }
+/* Position and style the close button (top right corner) */
+.sideNav #closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
 
-  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-  #main {
-      transition: margin-left .5s;
-      padding: 20px;
-  }
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
 
-  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-  @media screen and (max-height: 450px) {
-      .sideNav {padding-top: 15px;}
-      .sideNav a {font-size: 18px;}
-  }
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sideNav {padding-top: 15px;}
+  .sideNav a {font-size: 18px;}
+}
 
-  /*MODAL BOX TIME
-
-  */
-
-  /* The Modal (background) */
-  .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-
-  /* Modal Content/Box */
-  .modal-content {
-      background-color: rgb(239, 245, 255);
-      margin: 15% 15%; /* 15% from the top and centered */
-      padding: 5px;
-      border: 1px solid #888;
-      width: 70%; /* Could be more or less, depending on screen size */
-  }
-
-  /* The Close Button */
-  .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-  }
-
-  .close:hover,
-  .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-  }

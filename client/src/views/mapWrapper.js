@@ -155,7 +155,7 @@ MapWrapper.prototype = {
       var input = document.getElementById('pac-input');
       var options = {
           types: [],
-          componentRestrictions: {country: 'us'}
+          componentRestrictions: {country: 'uk'}
       };
 
       var searchBox = new google.maps.places.SearchBox(input);
