@@ -60,10 +60,10 @@ var cityChoose = document.querySelector("#cityChooseIcon");
 var citySearchBox = document.querySelector("#pac-input"); 
 cityChoose.addEventListener("click", ()=>{
   // debugger;
-  if(citySearchBox.style.visibility==="hidden"){
-    citySearchBox.style.visibility="visible";
+  if(citySearchBox.style.display==="none"){
+    citySearchBox.style.display="block";
   } else{
-    citySearchBox.style.visibility="hidden";
+    citySearchBox.style.display="none";
   }
 });
 
@@ -72,10 +72,10 @@ var distanceChoose = document.querySelector("#distanceChooseIcon");
 var distanceBox = document.querySelector("#distanceSelector"); 
 distanceChoose.addEventListener("click", ()=>{
   // debugger;
-  if(distanceBox.style.visibility==="hidden"){
-    distanceBox.style.visibility="visible";
+  if(distanceBox.style.display==="none"){
+    distanceBox.style.display="block";
   } else{
-    distanceBox.style.visibility="hidden";
+    distanceBox.style.display="none";
   }
 });
 
@@ -228,9 +228,8 @@ setUp: function(data){
 
     // this.mainMap.addClickEvent();
 
-    
 
-    debugger;
+
     // var liverCoords = {lat:53.4084, lng:-2.9916};
     // this.apiCall(liverCoords);
 

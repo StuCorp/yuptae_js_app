@@ -12,7 +12,7 @@ body{
   padding-bottom: 75%; // This is the aspect ratio
   height: 0;
   overflow: hidden;
-  margin: 5%;
+  /*margin: 5%;*/
 
 }
 #main-map iframe {
@@ -31,10 +31,18 @@ body{
   /*justify-content: space-around;*/
   font-family: 'Indie Flower', cursive;
   align-items: center;
-
 }
 
-.main {
+#headerText{
+  font-size: 200%;
+}
+
+#map-container {
+  justify-content: center;
+  width: 50%;
+  margin-right: 25%;
+  margin-left: 25%;
+  align-content: center;
   justify-content: center;
 }
 
@@ -56,14 +64,37 @@ body{
 
 
 /*STYLE OF INFO WINDOW CONTENTS*/
+.gm-style-iw{
+  width: 30%;
+}
+
+.infoWindowContent{
+  background-color: rgba(0,0,0,0);
+  color: slategrey;
+  background-color: white;
+  font-family: 'Roboto Slab', serif;
+}
+
+#gramLocationName{
+  font-size: 100%;
+  color: black;
+}
+
+#gramImageContainer{
+
+}
+
 #gramImage{
   width: 100px;
-
   flex: 2;
 }
 
 #gramCaption{
   flex: 1;
+  color: hotpink;
+  font-family: 'Roboto', sans-serif;
+  width: 100px;
+
 }
 
 #gramUserPic{
@@ -71,7 +102,9 @@ body{
 }
 
 #gramImageAndCaptionContainer{
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
+
 }
 
 
@@ -95,8 +128,8 @@ body{
 *
 */
 .icon {
-  width: 20px;
-  height: 20px;
+  width: 35px;
+  height: 35px;
 }
 
 #buttRefresh {
@@ -111,19 +144,45 @@ height: 20px;*/
 
 #distanceSelector {
   height: 20px;
-  visibility: hidden;
+  width: 200px;
+  display: none;
+  /*visibility: hidden;*/
 }
 
 #pac-input{
-  visibility: hidden;
+  /*visibility: hidden;*/
+  display: none;
   height: 20px;
-  width: 100px;
+  width: 200px;
 }
 
 #randomSelectButt {
-  height: 5%;
-  width: 5%;
+  height: 10%;
+  width: 10%;
 }
+
+#randomSelectButt:hover, 
+#randomSelectButt:focus {
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em rgba(#fff,0);
+}
+
+#buttOpen{
+  display: inline;
+}
+
+
+/*
+
+the invisible input bar
+
+*/
+#invisibleInputsBar{
+  display: flex;
+  flex-direction: column;
+
+}
+
 
 
   /*
@@ -178,9 +237,9 @@ height: 20px;*/
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
+#map-container {
   transition: margin-left .5s;
-  padding: 20px;
+  /*padding: 20px;*/
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */

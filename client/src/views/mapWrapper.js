@@ -7,7 +7,7 @@ var MapWrapper = function(container, center, zoom, data){
     zoom: zoom,
     disableDefaultUI: true,
     fullscreenControl: true,
-    zoomControl: true
+    zoomControl: false
   });
   this.markers =[]; 
   this.currentInfoWindow = undefined;  
@@ -19,13 +19,9 @@ var MapWrapper = function(container, center, zoom, data){
 MapWrapper.prototype = {
 
   addMarker: function(gram){
-    // var currentTime = new Date();
-    // var hours = Math.abs(currentTime - gram.createdTime) / 36e5;
     var recency = gram.getRecency();
-    // debugger;
     var marker = new google.maps.Marker({
       position: gram.coords,
-        // map: this.googleMap,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
           fillColor: 'rgba(' + _.random(0, 255) + ',' + _.random(0, 255) + ',' + _.random(0, 255) +','+ recency + ')', 
@@ -33,9 +29,7 @@ MapWrapper.prototype = {
           anchor: google.maps.Point(0,0), 
           scale: 7,
           strokeWeight: 1
-          // gram.postImageThumbnail,
         },
-        // icon: gram.postImageThumbnail,
         animation: google.maps.Animation.DROP
 
       });
@@ -46,9 +40,8 @@ MapWrapper.prototype = {
 
 
 
-    var contentString = '<div id="gramLocationName" class="infoWindowContent">' + gram.locationName + '</div><div id="gramImageAndCaptionContainer" class="infoWindowContent"><img id="gramImage" class="infoWindowContent" src=\"' + gram.postImageStndRes + '\"/> <span id="gramCaption" class="infoWindowContent">' + gram.caption + '</span></div><div id="gramUserAndProfileContainer" class="infoWindowContent"> <img id="gramUserPic" class="infoWindowContent" src=\"' + gram.profilePicture + '\"/><span id="gramUserName" class="infoWindowContent">' + gram.user + '</span><div id="gramCreationTime" class="infoWindowContent">' + gram.createdTime + '</div></div><a href=\"' +gram.externalLink+ '\" target="_blank">'+gram.externalLink+ '</a>'   
-    marker.addListener('click', function(){
-
+    var contentString = '<div id="gramContainer" background=\"'+gram.postImageStndRes +'\"><div id="gramLocationName" class="infoWindowContent">' + gram.locationName + '</div><div id="gramImageAndCaptionContainer" class="infoWindowContent"><div id="gramImageContainer"><img id="gramImage" class="infoWindowContent" src=\"' + gram.postImageStndRes + '\"/></div> <span id="gramCaption" class="infoWindowContent">' + gram.caption + '</span></div><div id="gramUserAndProfileContainer" class="infoWindowContent"> <img id="gramUserPic" class="infoWindowContent" src=\"' + gram.profilePicture + '\"/><span id="gramUserName" class="infoWindowContent">' + gram.user + '</span><div id="gramCreationTime" class="infoWindowContent">' + gram.createdTime + '</div></div><a href=\"' +gram.externalLink+ '\" target="_blank">'+gram.externalLink+ '</a></div>'   
+    marker.addListener('click', ()=>{
       var infoWindow = new google.maps.InfoWindow({
         content: contentString
       });
@@ -59,7 +52,9 @@ MapWrapper.prototype = {
         this.previousInfoWindow.close();
       }
 
-    }.bind(this));
+    
+
+    });
     this.markers.push(marker);
 
     this.setMapOnAll(this.googleMap);
@@ -73,23 +68,14 @@ MapWrapper.prototype = {
        'bubbles': true,
        'cancelable': true
      });
-    randomMarker.dispatchEvent(event);
-    // var bounceButton = document.querySelector("#buttOpen");
 
+    google.maps.event.trigger(randomMarker, 'click', {
+
+    });
 
   },
 
-  // addClickEvent: function(){
-  //   google.maps.event.addListener(this.googleMap, 'click', (event)=>{
-  //   //   console.log(event);
-  //   //   console.log(event.latLng.lat());
-  //   //   var coords = {lat: event.latLng.lat(), lng: event.latLng.lng()};
-  //   //   debugger;
-  //   //   this.addMarker({coords});
-  //   // }.bind(this));
-  //   this.clearMarkers();
-  // });
-  // },
+
 
   bounceMarkers: function(){
     this.markers.forEach(function(marker){
